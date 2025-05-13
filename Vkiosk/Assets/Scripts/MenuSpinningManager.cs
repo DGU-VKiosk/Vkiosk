@@ -29,7 +29,7 @@ public class MenuSpinningManager : MonoBehaviour
 
     public void ApplyDrag(float dragDelta)
     {
-        float deltaRotation = dragDelta * dragSensitivity;
+        float deltaRotation = -dragDelta * dragSensitivity;
         currentRotation += deltaRotation;
         UpdateMenuItemPositions();
     }

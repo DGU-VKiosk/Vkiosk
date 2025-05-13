@@ -23,6 +23,7 @@ public class StreamController : MonoBehaviour
         if (currentState != MenuState.Category) return;
 
         currentState = MenuState.Menu;
+        menuInputHandler.SetState(currentState);
         categoryMenuManager.gameObject.SetActive(false);
         itemMenuManager.gameObject.SetActive(true);
     }
@@ -32,6 +33,7 @@ public class StreamController : MonoBehaviour
         if (currentState != MenuState.Menu) return;
 
         currentState = MenuState.Category;
+        menuInputHandler.SetState(currentState);
         itemMenuManager.gameObject.SetActive(false);
         categoryMenuManager.gameObject.SetActive(true);
     }

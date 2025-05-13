@@ -1,9 +1,10 @@
 using UniRx;
 using UnityEngine;
 
+public enum MenuState { Category, Menu }
+
 public class MenuInputHandler : MonoBehaviour
 {
-    public MenuSpinningManager menuManager;
     public System.Action OnSwipeUp;
     public System.Action OnSwipeDown;
 
@@ -13,6 +14,18 @@ public class MenuInputHandler : MonoBehaviour
     private Vector2 lastMousePos;
     private bool isDragging = false;
     private float directionLockThreshold = 10f;
+
+    public MenuSpinningManager categoryManager;
+    public MenuSpinningManager itemManager;
+    private MenuState currentState = MenuState.Category;
+
+    public void SetState(MenuState state)
+    {
+        currentState = state;
+    }
+
+    private MenuSpinningManager ActiveManager =>
+        currentState == MenuState.Category ? categoryManager : itemManager;
 
     void Start()
     {
@@ -48,7 +61,7 @@ public class MenuInputHandler : MonoBehaviour
                 // 방향에 따라 동작
                 if (currentDragDirection == DragDirection.Horizontal)
                 {
-                    menuManager.ApplyDrag(delta.x);
+                    ActiveManager.ApplyDrag(delta.x);
                 }
                 else if (currentDragDirection == DragDirection.Vertical)
                 {
@@ -76,7 +89,7 @@ public class MenuInputHandler : MonoBehaviour
                 isDragging = false;
 
                 if (currentDragDirection == DragDirection.Horizontal)
-                    menuManager.StartDecayAndSnap();
+                    ActiveManager.StartDecayAndSnap();
 
                 currentDragDirection = DragDirection.None;
             });
