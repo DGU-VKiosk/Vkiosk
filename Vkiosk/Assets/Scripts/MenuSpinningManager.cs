@@ -42,7 +42,7 @@ public class MenuSpinningManager : MonoBehaviour
 
     private IEnumerator RotationDecayAndSnap()
     {
-        while (Mathf.Abs(rotationSpeed) > 0.5f)
+        while (Mathf.Abs(rotationSpeed) > 0.05f)
         {
             currentRotation += rotationSpeed;
             rotationSpeed = Mathf.Lerp(rotationSpeed, 0f, Time.deltaTime * decayRate);
@@ -110,9 +110,9 @@ public class MenuSpinningManager : MonoBehaviour
             }
         }
 
-        while (Mathf.Abs(Mathf.DeltaAngle(currentRotation, targetOffset)) > 0.3f)
+        while (Mathf.Abs(Mathf.DeltaAngle(currentRotation, targetOffset)) > 0.1f)
         {
-            currentRotation = Mathf.SmoothDampAngle(currentRotation, targetOffset, ref velocity, 0.3f); // 감속 시간 조정
+            currentRotation = Mathf.SmoothDampAngle(currentRotation, targetOffset, ref velocity, 0.1f); // 감속 시간 조정
             UpdateMenuItemPositions();
             yield return null;
         }
