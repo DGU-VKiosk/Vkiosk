@@ -12,6 +12,16 @@
 [Uu]ser[Ss]ettings/
 *.log
 
+**/Lib/site-packages/
+**/*.dll
+**/*.lib
+
+vkiosk/
+Lib/
+__pycache__/
+*.dll
+*.lib
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
