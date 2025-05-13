@@ -66,7 +66,7 @@ public class MenuSpinningManager : MonoBehaviour
 
             Vector3 newPos = new Vector3(
                 centerPoint.position.x + Mathf.Sin(angleRad) * radius,
-                0,
+                centerPoint.position.y,
                 centerPoint.position.z + Mathf.Cos(angleRad) * radius
             );
             menuItems[i].position = newPos;
