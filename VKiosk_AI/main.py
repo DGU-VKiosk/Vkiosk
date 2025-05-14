@@ -1,6 +1,6 @@
 from Camera import *
-from PersonDetection import *
-from HandTracking import *
+from PersonDetection import detect_persons, draw_person_boxes
+from HandTracking import detect_and_draw_hands
 from UserRegister import *
 import cv2
 
@@ -22,6 +22,8 @@ while True:
 
     # Draw cognition zone
     draw_zone(frame, zone)
+
+    # Detect and Draw hands
     detect_and_draw_hands(frame, boxes, registered_id)
 
     # Display Camera
