@@ -61,19 +61,33 @@ def detect_and_draw_hands(frame, person_boxes, registered_id, track_ids):
                         cv2.putText(frame, "Fist", (hand_x, hand_y - 40),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                         
-                    elif is_swip(prev_x, hand_x, hand_landmarks.landmark) == "right":
+                    elif is_swip(prev_x, hand_x, prev_y, hand_y, hand_landmarks.landmark) == "right":
                         direction = "Right Swipe"
                         if swiping == False:
                             swiping = True
                         cv2.putText(frame, direction, (hand_x, hand_y - 40),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 0, 0), 2)
 
-                    elif is_swip(prev_x, hand_x, hand_landmarks.landmark) == "left":
+                    elif is_swip(prev_x, hand_x, prev_y, hand_y, hand_landmarks.landmark) == "left":
                         direction = "Left Swipe"
                         if swiping == False:
                             swiping = True
                         cv2.putText(frame, direction, (hand_x, hand_y - 40),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 0, 0), 2)    
+                        
+                    elif is_swip(prev_x, hand_x, prev_y, hand_y, hand_landmarks.landmark) == "up":
+                        direction = "Up Swipe"
+                        if swiping == False:
+                            swiping = True
+                        cv2.putText(frame, direction, (hand_x, hand_y - 40),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 0, 0), 2)  
+                        
+                    elif is_swip(prev_x, hand_x, prev_y, hand_y, hand_landmarks.landmark) == "down":
+                        direction = "Down Swipe"
+                        if swiping == False:
+                            swiping = True
+                        cv2.putText(frame, direction, (hand_x, hand_y - 40),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 0, 0), 2)  
                         
                     elif is_click(prev_y, hand_y, hand_landmarks.landmark):
                         pyautogui.click()   # Click

@@ -19,6 +19,8 @@ while True:
 
     # Update registered id
     if registered_id == None:
+        # Draw cognition zone
+        draw_zone(frame, zone)
         registered_id = user_registration(boxes, zone, registered_id, track_ids)
     else:
         registered_id = user_unregisteration(registered_id, track_ids)
@@ -27,9 +29,6 @@ while True:
 
     # Draw person box
     draw_person_boxes(frame, boxes, registered_id, track_ids)
-
-    # Draw cognition zone
-    draw_zone(frame, zone)
 
     # Display Camera
     cv2.imshow("Main", frame)
