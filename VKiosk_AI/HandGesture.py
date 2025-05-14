@@ -20,9 +20,9 @@ def is_swip(pre_x, cur_x, pre_y, cur_y, landmarks):
             
         if abs(dy) > SWIPE_THRESHOLD:
             if dy > 0:
-                return "up"
-            elif dy < 0:
                 return "down"
+            elif dy < 0:
+                return "up"
             
 def is_index(landmarks):
     return landmarks[8].y < landmarks[6].y and all(landmarks[tip].y > landmarks[tip - 2].y for tip in [12, 16, 20])
