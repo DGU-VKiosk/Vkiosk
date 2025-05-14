@@ -18,7 +18,7 @@ def hand_inside_box(x, y, box):
     x1, y1, x2, y2 = box
     return x1 <= x <= x2 and y1 <= y <= y2
 
-def detect_and_draw_hands(frame, person_boxes, registered_id):
+def detect_and_draw_hands(frame, person_boxes, registered_id, track_ids):
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = hands.process(rgb)
 
@@ -35,16 +35,18 @@ def detect_and_draw_hands(frame, person_boxes, registered_id):
             h, w, _ = frame.shape                               # Get frame shape
             hand_x, hand_y = int(wrist.x * w), int(wrist.y * h) # Coordinate transformation
 
-            matched_id = None                                   # Init matched id
+            matched = False                                   
             for j, box in enumerate(person_boxes):              # Check all person box and link hand
                 if hand_inside_box(hand_x, hand_y, box):        
-                    matched_id = j                           
-                    break
+                    tid = track_ids[j]
+                    if tid == registered_id:
+                        matched = True
+                        break
             
             # Check registered person
-            if matched_id == registered_id:
+            if matched:
                 mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-                key = f"hand_{matched_id}"
+                key = f"hand_{registered_id}"
 
                 screen_x = int(wrist.x * screen_w)
                 screen_y = int(wrist.y * screen_h)

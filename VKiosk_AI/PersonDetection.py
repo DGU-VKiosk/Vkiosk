@@ -14,10 +14,11 @@ def detect_persons(frame):
             boxes.append(list(map(int, r.xyxy[0])))
     return boxes
 
-def draw_person_boxes(frame, boxes, registered_id):
+def draw_person_boxes(frame, boxes, registered_id, track_ids):
     for i, (x1, y1, x2, y2) in enumerate(boxes):
-        color = (0, 255, 0) if i == registered_id else (0, 0, 255)
-        label = f"User {i}" if i == registered_id else f"Person {i}"
+        tid = track_ids[i]
+        color = (0, 255, 0) if tid == registered_id else (0, 0, 255)
+        label = f"User {i}" if tid == registered_id else f"Person {i}"
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
         cv2.putText(frame, label, (x1, y1 - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
