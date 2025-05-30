@@ -2,6 +2,7 @@ import mediapipe as mp
 import cv2
 import pyautogui
 from HandGesture import *
+from SocketSender import send_gesture
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=2, min_detection_confidence=0.7)
@@ -91,6 +92,7 @@ def detect_and_draw_hands(frame, person_boxes, registered_id, track_ids):
                         
                     elif is_click(prev_y, hand_y, hand_landmarks.landmark):
                         pyautogui.click()   # Click
+                        send_gesture("click", wrist.x, wrist.y)
                         cv2.putText(frame, "Click", (hand_x, hand_y - 40),
                                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 200), 2)   
                         
